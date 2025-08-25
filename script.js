@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeHButton = document.getElementById('remove-H-button');
     const historyTableBody = document.querySelector('#history-table tbody');
     const userNameInput = document.getElementById('user-name-input'); // เลือกช่องกรอกชื่อ
+    const saveButton.addEventListener('click', () => {
+    saveData();
+    alert('ข้อมูลถูกบันทึกแล้ว!');
+}
+
 
     // ฟังก์ชันสำหรับบันทึกข้อมูลลงใน localStorage
     function saveData() {

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการน้ำมันในถัง</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ระบบจัดการน้ำมันในถังเชื้อเพลิง</h1>
+        
+        <div class="tank-status-container">
+            <div class="tank-image-capsule">
+                <div class="tank-section H-tank-section">
+                    <div class="fuel-level" id="H-level"></div>
+                    <span class="tank-label">H</span>
+                </div>
+                <div class="tank-section M-tank-section">
+                    <div class="fuel-level" id="M-level"></div>
+                    <span class="tank-label">M</span>
+                </div>
+            </div>
+            <div class="status-info">
+                <p>ปริมาณน้ำมันคงเหลือรวม:</p>
+                <h2 id="total-volume">0 ลิตร</h2>
+                <p>ส่วน H: <span id="H-volume">0 ลิตร</span></p>
+                <p>ส่วน M: <span id="M-volume">0 ลิตร</span></p>
+            </div>
+        </div>
+
+        <div class="controls-container">
+            <div class="control-box">
+                <h3>เติมน้ำมัน</h3>
+                <input type="number" id="add-volume-input" placeholder="ปริมาณ (ลิตร)">
+                <button id="add-M-button">เติม M</button>
+                <button id="add-H-button">เติม H</button>
+            </div>
+            <div class="control-box">
+                <h3>นำน้ำมันออก</h3>
+                <input type="number" id="remove-volume-input" placeholder="ปริมาณ (ลิตร)">
+                <button id="remove-M-button">นำออก M</button>
+                <button id="remove-H-button">นำออก H</button>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3>ประวัติการใช้งาน</h3>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>วันที่/เวลา</th>
+                        <th>รายการ</th>
+                        <th>ปริมาณ (ลิตร)</th>
+                        <th>สถานะคงเหลือรวม (ลิตร)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

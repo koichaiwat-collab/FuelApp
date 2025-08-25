@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (savedHistory !== null) {
             history = JSON.parse(savedHistory);
+            // แสดงข้อมูลในตารางย้อนหลัง
             history.forEach(entry => addHistoryEntryToTable(entry.type, entry.amount, entry.remainingVolume, entry.user, false));
         }
 
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ฟังก์ชันสำหรับเพิ่มรายการในตาราง
     function addHistoryEntryToTable(type, amount, remainingVolume, user, isNew) {
-        const newRow = historyTableBody.insertRow(isNew ? 0 : historyTableBody.rows.length);
+        const newRow = isNew ? historyTableBody.insertRow(0) : historyTableBody.insertRow(-1);
         
         const dateCell = newRow.insertCell(0);
         const typeCell = newRow.insertCell(1);

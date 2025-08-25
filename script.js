@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeMButton = document.getElementById('remove-M-button');
     const removeHButton = document.getElementById('remove-H-button');
     const historyTableBody = document.querySelector('#history-table tbody');
+    const userNameInput = document.getElementById('user-name-input'); // เลือกช่องกรอกชื่อ
 
     // ฟังก์ชันสำหรับบันทึกข้อมูลลงใน localStorage
     function saveData() {
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (savedHistory !== null) {
             history = JSON.parse(savedHistory);
-            history.forEach(entry => addHistoryEntryToTable(entry.type, entry.amount, entry.remainingVolume, false));
+            history.forEach(entry => addHistoryEntryToTable(entry.type, entry.amount, entry.remainingVolume, entry.user, false));
         }
 
         if (savedVolumeM === null && savedVolumeH === null) {
@@ -68,31 +69,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ฟังก์ชันสำหรับเพิ่มรายการในประวัติ
     function addHistoryEntry(type, amount) {
+        const user = userNameInput.value.trim() || 'ไม่ระบุ'; // ดึงชื่อผู้บันทึก
         const remainingVolume = currentVolumeM + currentVolumeH;
         const newEntry = {
             date: new Date().toLocaleString('th-TH'),
             type: type,
             amount: amount,
-            remainingVolume: remainingVolume
+            remainingVolume: remainingVolume,
+            user: user
         };
         history.unshift(newEntry);
-        addHistoryEntryToTable(type, amount, remainingVolume, true);
+        addHistoryEntryToTable(type, amount, remainingVolume, user, true);
         saveData();
     }
 
     // ฟังก์ชันสำหรับเพิ่มรายการในตาราง
-    function addHistoryEntryToTable(type, amount, remainingVolume, isNew) {
+    function addHistoryEntryToTable(type, amount, remainingVolume, user, isNew) {
         const newRow = historyTableBody.insertRow(isNew ? 0 : history.length - 1);
         
         const dateCell = newRow.insertCell(0);
         const typeCell = newRow.insertCell(1);
         const amountCell = newRow.insertCell(2);
         const remainingCell = newRow.insertCell(3);
+        const userCell = newRow.insertCell(4);
 
         dateCell.textContent = new Date().toLocaleString('th-TH');
         typeCell.textContent = type;
         amountCell.textContent = `${amount.toLocaleString()}`;
         remainingCell.textContent = `${remainingVolume.toLocaleString()}`;
+        userCell.textContent = user;
     }
 
     // เหตุการณ์เมื่อคลิกปุ่ม "เติม M"

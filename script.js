@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeMButton = document.getElementById('remove-M-button');
     const removeHButton = document.getElementById('remove-H-button');
     const historyTableBody = document.querySelector('#history-table tbody');
-    const userNameInput = document.getElementById('user-name-input'); // เลือกช่องกรอกชื่อ
+    const userNameInput = document.getElementById('user-name-input');
 
     // ฟังก์ชันสำหรับบันทึกข้อมูลลงใน localStorage
     function saveData() {
@@ -45,12 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             history.forEach(entry => addHistoryEntryToTable(entry.type, entry.amount, entry.remainingVolume, entry.user, false));
         }
 
-        if (savedVolumeM === null && savedVolumeH === null) {
-            currentVolumeM = 0;
-            currentVolumeH = 0;
-            saveData();
-        }
-
         updateUI();
     }
 
@@ -69,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ฟังก์ชันสำหรับเพิ่มรายการในประวัติ
     function addHistoryEntry(type, amount) {
-        const user = userNameInput.value.trim() || 'ไม่ระบุ'; // ดึงชื่อผู้บันทึก
+        const user = userNameInput.value.trim() || 'ไม่ระบุ';
         const remainingVolume = currentVolumeM + currentVolumeH;
         const newEntry = {
             date: new Date().toLocaleString('th-TH'),
@@ -85,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ฟังก์ชันสำหรับเพิ่มรายการในตาราง
     function addHistoryEntryToTable(type, amount, remainingVolume, user, isNew) {
-        const newRow = historyTableBody.insertRow(isNew ? 0 : history.length - 1);
+        const newRow = historyTableBody.insertRow(isNew ? 0 : historyTableBody.rows.length);
         
         const dateCell = newRow.insertCell(0);
         const typeCell = newRow.insertCell(1);
